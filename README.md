@@ -3,3 +3,4 @@
 3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/HTML">HTML</a> ver.200807
 4. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL">MySQL</a> ver.200812
 5. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Git">Git</a> ver.200812
+6. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Javascript">Javascript</a> ver.200812
