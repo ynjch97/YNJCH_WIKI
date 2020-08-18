@@ -7,7 +7,7 @@
 <br>
 
 <h4>백엔드</h4>
-1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/JAVA">JAVA</a> ver.200807
+1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/JAVA">JAVA</a> <sub>ver.200807</sub>
 <br>
 2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL">MySQL</a> ver.200814
 <br>
