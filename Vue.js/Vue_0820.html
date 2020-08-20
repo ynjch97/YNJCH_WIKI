@@ -33,13 +33,9 @@
 		.select-area {margin-top:30px; font-size:16px; padding:20px; border:1px solid #ccc;background-color:#eee;}
 		.select-area .lspace {padding:0 10px 0 20px;}
 		.select-area .tbspace {padding:10px 0;}
-		.select-area .tt1 {padding:0 15px 0 0;}
-		.select-area .tt2 {padding:0 0 0 30px;}
-		.select-right {margin-top:20px; text-align:right;}
-		.select-right strong {padding:0 10px 0 20px;}
-		.select-left {margin-top:20px;}		
 		.span {float:left;margin-right:8px;font-size:15px;}
 		.span {color:#333;font-weight:bold;}
+		.code-area {margin-top:10px; font-size:70%; padding:10px; border:1px solid #ccc;background-color:#666; color:#fff;}
 		input, select, textarea {
 			color:#333;
 			font-size:100%;
@@ -70,6 +66,7 @@
 		}
 		input.txt { width:296px; margin-left:5px; }
 		textarea.textarea:focus {outline:1px solid blue;}
+		.scroll-area {height:200px;overflow-y: scroll;}
 	</style>
 	
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  <!-- 개발자 버전 -->
@@ -80,53 +77,22 @@
 		});
 		
 		function clickEvent() {
-			var app1 = new Vue({
-				el: '#app-1',
-				data: {
-					message: 'app1.message = \'\' 를 이용해 텍스트 변경해보기'
-				}
+			Vue.component('todo-item', {
+				// 이제 todo-item 컴포넌트는 "prop" 이라고 하는
+				// 사용자 정의 속성 같은 것을 입력받을 수 있습니다.
+				// 이 prop은 todo라는 이름으로 정의했습니다.
+				props: ['todo'],
+				template: '<li>{{ todo.text }}</li>'
 			})
 			
-			var app2 = new Vue({
-				el: '#app-2',
+			var app7 = new Vue({
+				el: '#app-7',
 				data: {
-					message: '' + new Date() + ' 에 title 변경'
-				}
-			})
-			
-			var app3 = new Vue({
-				el: '#app-3',
-				data: {
-					seen: false
-				}
-			})
-			
-			var app4 = new Vue({
-				el: '#app-4',
-				data: {
-					todos: [
-						{ text: 'JavaScript' },
-						{ text: 'Vue' }
+					groceryList: [
+						{ id: 0, text: '상추' },
+						{ id: 1, text: '깻잎' },
+						{ id: 2, text: '치커리' }
 					]
-				}
-			})
-			
-			var app5 = new Vue({
-				el: '#app-5',
-				data: {
-					message: '메세지 뒤집기 reverse() 함수'
-				},
-				methods: {
-					reverseMessage: function () {
-						this.message = this.message.split('').reverse().join('')
-					}
-				}
-			})
-			
-			var app6 = new Vue({
-				el: '#app-6',
-				data: {
-					message: 'input 박스 내용 수정과 동시에 바뀜'
 				}
 			})
 		}
@@ -140,83 +106,61 @@
 	
 	<br><br>
 
-	<span class="span">📌 선언적 렌더링 1</span>
-	<div id="app-1" class="select-area">
-		{{ message }}
+	<span class="span">📌 컴포넌트를 사용한 작성방법</span>
+	<div class="select-area">
+		<div id="app-7">
+			<ol>
+				<todo-item
+				  v-for="item in groceryList"
+				  v-bind:todo="item"
+				  v-bind:key="item.id"
+				></todo-item>
+			</ol>
+		</div>
 		<h6>
-			* 간단한 템플릿 구문을 사용하여 DOM에서 데이터를 선언적으로 렌더링 할 수있는 시스템이 있음<br>
-			* Vue 앱은 단일 DOM 요소(우리의 경우 #app)에 연결되어 DOM 요소를 완전히 제어함<br>
-			* HTML는 엔트리 포인트일뿐 다른 모든 것은 새롭게 생성된 Vue 인스턴스 내에서 발생
+			* prop을 전달받을 수 있도록 todo-item 컴포넌트 정의<br>
+			* v-bind를 사용하여 각각의 반복되는 todo-item 컴포넌트에 전달할 수 있음
 		</h6>
-	</div>
-	
-	<br>
-	
-	<span class="span">📌 선언적 렌더링 2</span>
-	<div id="app-2" class="select-area">
-		<span v-bind:title="message">
-			동적으로 바인딩 된 title 확인하기
-		</span>
-		<h6>
-			* 엘리먼트 속성을 바인딩 할 수 있음<br>
-			* v-bind 속성(디렉티브) : Vue에서 제공하는 특수 속성임을 나타내는 v- 접두어가 붙어있으며 렌더링 된 DOM에 특수한 반응형 동작을 함<br>
-			* 이 요소의 title 속성을 Vue 인스턴스의 message 속성으로 최신 상태를 유지<br>
-			* app2.message = '새로운 메시지'라고 입력 시 HTML(이 경우에 title 속성)이 업데이트 되었음을 확인할 수 있음
-		</h6>
-	</div>
-	
-	<br>
-	
-	<span class="span">📌 조건문</span>
-	<div id="app-3" class="select-area">
-		<p v-if="seen">문구 사라지게 하기</p>
-		<h6>
-			* app3.seen = false를 입력하면, 메시지가 사라지는 것을 볼 수 있음<br>
-			* 텍스트와 속성뿐 아니라 DOM의 구조에도 데이터를 바인딩 할 수 있음<br>
-			* Vue 엘리먼트가 Vue에 삽입/업데이트/제거될 때 자동으로 트랜지션 효과를 적용할 수 있는 강력한 전환 효과 시스템을 제공<br>
-			* 각 디렉티브마다 고유한 기능이 있음 (v-for 디렉티브는 배열의 데이터를 바인딩하여 Todo 목록을 표시하는데 사용할 수 있음)
-		</h6>
-	</div>
-	
-	<br>
-	
-	<span class="span">📌 반복문</span>
-	<div id="app-4" class="select-area">
-		<ol>
-			<li v-for="todo in todos">
-				{{ todo.text }}
-			</li>
-		</ol>
-		<h6>
-			* app4.todos.push({ text: 'New item' })을 입력해 Todo 목록에 새 항목이 동적으로 추가된 것을 볼 수 있음
-		</h6>
-	</div>
-	
-	<br>
+		<div class="code-area">
+			<pre class="scroll-area">
+Vue.component('todo-item', {
+	// 이제 todo-item 컴포넌트는 "prop" 이라고 하는
+	// 사용자 정의 속성 같은 것을 입력받을 수 있습니다.
+	// 이 prop은 todo라는 이름으로 정의했습니다.
+	props: ['todo'],
+	template: '<li>{{ todo.text }}</li>'
+})
 
-	<span class="span">📌 사용자 입력 핸들링 1</span>
-	<div id="app-5" class="select-area">
-		<p>{{ message }}</p>
-		<button  class="btn bg-blue" v-on:click="reverseMessage">입력된 메시지를 뒤집음</button>
-		<h6>
-			* v-on 디렉티브를 사용하여 Vue 인스턴스에서 메소드를 호출하는 이벤트 리스너를 추가<br>
-			* 직접적으로 DOM을 건드리지 않고 앱의 상태만을 업데이트<br>
-			* 모든 DOM 조작은 Vue에 의해 처리되며 작성한 코드는 기본 로직에만 초점을 맞춤
-		</h6>
+var app7 = new Vue({
+	el: '#app-7',
+	data: {
+		groceryList: [
+			{ id: 0, text: '상추' },
+			{ id: 1, text: '깻잎' },
+			{ id: 2, text: '치커리' }
+		]
+	}
+})			
+
+&lt;ol&gt;
+	&lt;!--
+	  이제 각 todo-item 에 todo 객체를 제공합니다.
+	  화면에 나오므로, 각 항목의 컨텐츠는 동적으로 바뀔 수 있습니다.
+	  또한 각 구성 요소에 "키"를 제공해야합니다 (나중에 설명 됨).
+	 --&gt;
+	&lt;todo-item
+	  v-for="item in groceryList"
+	  v-bind:todo="item"
+	  v-bind:key="item.id"
+	&gt;&lt;/todo-item&gt;
+&lt;/ol&gt;
+			</pre>
+		</div>
 	</div>
 	
 	<br>
 	
-	<span class="span">📌 사용자 입력 핸들링 2</span>
-	<div id="app-6" class="select-area">
-		<p>{{ message }}</p>
-		<input type="text" class="txt" style="margin-top:10px; width:90%;"v-model="message">
-		<h6>
-			* 양식에 대한 입력과 앱 상태를 양방향으로 바인딩하는 v-model 디렉티브를 제공<br>
-		</h6>
-	</div>
 	
-	<br>
 
 </body>
 </html>
