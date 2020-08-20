@@ -1,0 +1,222 @@
+<html>
+<head>
+	<title> Vue.js </title>
+
+	<style>
+		html, body, h1, h2, h3, h4, h5, h6, p, div, th, td, table, pre, code, select, form, fieldset, legend, input, button, address, ol, ul, li, dl, dt, dd, img, textarea, blockquote {margin:0;padding:0;}
+		html, body {height:100%;}
+		body {background-color:#fff; padding:10px;}
+		body, input, button, select, textarea {font-family:"Malgun Gothic","맑은 고딕","dotum","돋움",sans-serif;font-size:100%;color:#666;line-height:1.5;}
+		button {font-size:80%;}
+		h1, h2, h3, h4, h5, h6 {color:#333;font-weight:normal;}
+		h6 {font-family:"Malgun Gothic","맑은 고딕","dotum","돋움",sans-serif;font-size:60%;color:#666;line-height:1.5; margin-top:5px;}
+		table {table-layout:fixed;width:100%;border-collapse:separate;border-spacing:0;}
+		ol, ul {list-style-type:none;}
+		img, fieldset {vertical-align:top;border:0;}
+		em, i, address {font-style:normal;}
+		a:link, a:visited, a:active {color:#666;text-decoration:none;}
+		a:hover, a:focus {text-decoration:none;}
+		textarea {overflow:auto;padding:7px 10px;resize:none;box-sizing:border-box;}
+		button {overflow:visible;display:inline-block;background:none;border:0;cursor:pointer;margin-top:10px;}
+		button, button:focus, button:active {padding:0;}
+		button > span {position:relative;}
+		button::-moz-focus-inner,
+		.btn.bg-white { background: #fff; padding:5px; border-radius: 15px;}
+		.btn.bg-blue { background: #7777aa; color:#fff; padding:5px; border-radius: 15px;}
+		.btn.bg-red { background: #e30000; color:#fff; padding:5px; border-radius: 15px;}
+		.radio-area.inc-ele [type="radio"] + label:before { top: 6px;}
+		.radio-area.inc-ele [type="radio"]:checked + label:after { top: 9px;}
+		.ellipsis {display:inline-block;overflow:hidden;max-width:95%;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.5px;}
+		[type="button"]::-moz-focus-inner,
+		[type="reset"]::-moz-focus-inner,
+		[type="submit"]::-moz-focus-inner {border-style:none;padding:0;}
+		.select-area {margin-top:30px; font-size:16px; padding:20px; border:1px solid #ccc;background-color:#eee;}
+		.select-area .lspace {padding:0 10px 0 20px;}
+		.select-area .tbspace {padding:10px 0;}
+		.select-area .tt1 {padding:0 15px 0 0;}
+		.select-area .tt2 {padding:0 0 0 30px;}
+		.select-right {margin-top:20px; text-align:right;}
+		.select-right strong {padding:0 10px 0 20px;}
+		.select-left {margin-top:20px;}		
+		.span {float:left;margin-right:8px;font-size:15px;}
+		.span {color:#333;font-weight:bold;}
+		input, select, textarea {
+			color:#333;
+			font-size:100%;
+			font-family: "Noto Sans KR", sans-serif;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			vertical-align:top;
+		}
+		input[type='text'],
+		input[type='password'] {height:39px; padding:0 12px; border:1px solid #dcdcdc; background:#fff; font-size:14px; font-weight:500; color:#333; font-family: "Noto Sans KR", sans-serif; border-radius:0; -webkit-border-radius:0; -moz-border-radius:0;}
+		input[type='text']::-ms-clear {display:none;}
+		input[type='password']::-ms-reveal {display:none;}
+		*::-webkit-input-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
+		*::-moz-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
+		*:-ms-input-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
+		*:-moz-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
+		input[type='password']:disabled { background:#eee; }
+		textarea.textarea {
+			width:100%;
+			height:220px;
+			padding:12px;
+			border:1px solid #dcdcdc;
+			background:#fff;
+			font-family: "Noto Sans KR", sans-serif;
+			font-size:14px;
+			line-height:21px;
+		}
+		input.txt { width:296px; margin-left:5px; }
+		textarea.textarea:focus {outline:1px solid blue;}
+	</style>
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  <!-- 개발자 버전 -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> --> <!-- 상용 버전 -->
+	<script src="jquery-1.11.0.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		});
+		
+		function clickEvent() {
+			var app1 = new Vue({
+				el: '#app-1',
+				data: {
+					message: 'app1.message = \'\' 를 이용해 텍스트 변경해보기'
+				}
+			})
+			
+			var app2 = new Vue({
+				el: '#app-2',
+				data: {
+					message: '' + new Date() + ' 에 title 변경'
+				}
+			})
+			
+			var app3 = new Vue({
+				el: '#app-3',
+				data: {
+					seen: false
+				}
+			})
+			
+			var app4 = new Vue({
+				el: '#app-4',
+				data: {
+					todos: [
+						{ text: 'JavaScript' },
+						{ text: 'Vue' }
+					]
+				}
+			})
+			
+			var app5 = new Vue({
+				el: '#app-5',
+				data: {
+					message: '메세지 뒤집기 reverse() 함수'
+				},
+				methods: {
+					reverseMessage: function () {
+						this.message = this.message.split('').reverse().join('')
+					}
+				}
+			})
+			
+			var app6 = new Vue({
+				el: '#app-6',
+				data: {
+					message: 'input 박스 내용 수정과 동시에 바뀜'
+				}
+			})
+		}
+	</script>
+</head>
+
+<body>
+
+	<button class="btn bg-red" onclick="javascript:clickEvent();"> 테스트 시작하려면 click </button> 
+	<button class="btn bg-red" onclick="javascript:location.reload();"> 새로고침 </button>
+	
+	<br><br>
+
+	<span class="span">📌 선언적 렌더링 1</span>
+	<div id="app-1" class="select-area">
+		{{ message }}
+		<h6>
+			* 간단한 템플릿 구문을 사용하여 DOM에서 데이터를 선언적으로 렌더링 할 수있는 시스템이 있음<br>
+			* Vue 앱은 단일 DOM 요소(우리의 경우 #app)에 연결되어 DOM 요소를 완전히 제어함<br>
+			* HTML는 엔트리 포인트일뿐 다른 모든 것은 새롭게 생성된 Vue 인스턴스 내에서 발생
+		</h6>
+	</div>
+	
+	<br>
+	
+	<span class="span">📌 선언적 렌더링 2</span>
+	<div id="app-2" class="select-area">
+		<span v-bind:title="message">
+			동적으로 바인딩 된 title 확인하기
+		</span>
+		<h6>
+			* 엘리먼트 속성을 바인딩 할 수 있음<br>
+			* v-bind 속성(디렉티브) : Vue에서 제공하는 특수 속성임을 나타내는 v- 접두어가 붙어있으며 렌더링 된 DOM에 특수한 반응형 동작을 함<br>
+			* 이 요소의 title 속성을 Vue 인스턴스의 message 속성으로 최신 상태를 유지<br>
+			* app2.message = '새로운 메시지'라고 입력 시 HTML(이 경우에 title 속성)이 업데이트 되었음을 확인할 수 있음
+		</h6>
+	</div>
+	
+	<br>
+	
+	<span class="span">📌 조건문</span>
+	<div id="app-3" class="select-area">
+		<p v-if="seen">문구 사라지게 하기</p>
+		<h6>
+			* app3.seen = false를 입력하면, 메시지가 사라지는 것을 볼 수 있음<br>
+			* 텍스트와 속성뿐 아니라 DOM의 구조에도 데이터를 바인딩 할 수 있음<br>
+			* Vue 엘리먼트가 Vue에 삽입/업데이트/제거될 때 자동으로 트랜지션 효과를 적용할 수 있는 강력한 전환 효과 시스템을 제공<br>
+			* 각 디렉티브마다 고유한 기능이 있음 (v-for 디렉티브는 배열의 데이터를 바인딩하여 Todo 목록을 표시하는데 사용할 수 있음)
+		</h6>
+	</div>
+	
+	<br>
+	
+	<span class="span">📌 반복문</span>
+	<div id="app-4" class="select-area">
+		<ol>
+			<li v-for="todo in todos">
+				{{ todo.text }}
+			</li>
+		</ol>
+		<h6>
+			* app4.todos.push({ text: 'New item' })을 입력해 Todo 목록에 새 항목이 동적으로 추가된 것을 볼 수 있음
+		</h6>
+	</div>
+	
+	<br>
+
+	<span class="span">📌 사용자 입력 핸들링 1</span>
+	<div id="app-5" class="select-area">
+		<p>{{ message }}</p>
+		<button  class="btn bg-blue" v-on:click="reverseMessage">입력된 메시지를 뒤집음</button>
+		<h6>
+			* v-on 디렉티브를 사용하여 Vue 인스턴스에서 메소드를 호출하는 이벤트 리스너를 추가<br>
+			* 직접적으로 DOM을 건드리지 않고 앱의 상태만을 업데이트<br>
+			* 모든 DOM 조작은 Vue에 의해 처리되며 작성한 코드는 기본 로직에만 초점을 맞춤
+		</h6>
+	</div>
+	
+	<br>
+	
+	<span class="span">📌 사용자 입력 핸들링 2</span>
+	<div id="app-6" class="select-area">
+		<p>{{ message }}</p>
+		<input type="text" class="txt" style="margin-top:10px; width:90%;"v-model="message">
+		<h6>
+			* 양식에 대한 입력과 앱 상태를 양방향으로 바인딩하는 v-model 디렉티브를 제공<br>
+		</h6>
+	</div>
+	
+	<br>
+
+</body>
+</html>
