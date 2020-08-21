@@ -5,7 +5,7 @@
 <br>
 3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Javascript">Javascript</a> ver.200819
 <br>
-4. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Vue.js">Vue.js</a> ver.200820
+4. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Vue.js">Vue.js</a> ver.200821
 <br>
 
 <h4>백엔드</h4>
