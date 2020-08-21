@@ -1,72 +1,7 @@
 <html>
 <head>
 	<title> Vue.js </title>
-
-	<style>
-		html, body, h1, h2, h3, h4, h5, h6, p, div, th, td, table, pre, code, select, form, fieldset, legend, input, button, address, ol, ul, li, dl, dt, dd, img, textarea, blockquote {margin:0;padding:0;}
-		html, body {height:100%;}
-		body {background-color:#fff; padding:10px;}
-		body, input, button, select, textarea {font-family:"Malgun Gothic","맑은 고딕","dotum","돋움",sans-serif;font-size:100%;color:#666;line-height:1.5;}
-		button {font-size:80%;}
-		h1, h2, h3, h4, h5, h6 {color:#333;font-weight:normal;}
-		h6 {font-family:"Malgun Gothic","맑은 고딕","dotum","돋움",sans-serif;font-size:60%;color:#666;line-height:1.5; margin-top:5px;}
-		table {table-layout:fixed;width:100%;border-collapse:separate;border-spacing:0;}
-		ol, ul {list-style-type:none;}
-		a:link, a:visited, a:active {color:#666;text-decoration:none;}
-		a:hover, a:focus {text-decoration:none;}
-		textarea {overflow:auto;padding:7px 10px;resize:none;box-sizing:border-box;}
-		button {overflow:visible;display:inline-block;background:none;border:0;cursor:pointer;margin-top:10px;}
-		button, button:focus, button:active {padding:0;}
-		button > span {position:relative;}
-		button::-moz-focus-inner,
-		.btn.bg-white { background: #fff; padding:5px; border-radius: 15px;}
-		.btn.bg-blue { background: #7777aa; color:#fff; padding:5px; border-radius: 15px;}
-		.btn.bg-red { background: #e30000; color:#fff; padding:5px; border-radius: 15px;}
-		.radio-area.inc-ele [type="radio"] + label:before { top: 6px;}
-		.radio-area.inc-ele [type="radio"]:checked + label:after { top: 9px;}
-		.ellipsis {display:inline-block;overflow:hidden;max-width:95%;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.5px;}
-		[type="button"]::-moz-focus-inner,
-		[type="reset"]::-moz-focus-inner,
-		[type="submit"]::-moz-focus-inner {border-style:none;padding:0;}
-		.select-area {margin-top:30px; font-size:16px; padding:20px; border:1px solid #ccc;background-color:#eee;}
-		.select-area .lspace {padding:0 10px 0 20px;}
-		.select-area .tbspace {padding:10px 0;}
-		.span {float:left;margin-right:8px;font-size:15px;}
-		.span {color:#333;font-weight:bold;}
-		.code-area {margin-top:10px; font-size:70%; padding:10px; border:1px solid #ccc;background-color:#666; color:#fff;}
-		input, select, textarea {
-			color:#333;
-			font-size:100%;
-			font-family: "Noto Sans KR", sans-serif;
-			-moz-box-sizing: border-box;
-			-webkit-box-sizing: border-box;
-			box-sizing: border-box;
-			vertical-align:top;
-		}
-		input[type='text'],
-		input[type='password'] {height:39px; padding:0 12px; border:1px solid #dcdcdc; background:#fff; font-size:14px; font-weight:500; color:#333; font-family: "Noto Sans KR", sans-serif; border-radius:0; -webkit-border-radius:0; -moz-border-radius:0;}
-		input[type='text']::-ms-clear {display:none;}
-		input[type='password']::-ms-reveal {display:none;}
-		*::-webkit-input-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
-		*::-moz-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
-		*:-ms-input-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
-		*:-moz-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
-		input[type='password']:disabled { background:#eee; }
-		textarea.textarea {
-			width:100%;
-			height:220px;
-			padding:12px;
-			border:1px solid #dcdcdc;
-			background:#fff;
-			font-family: "Noto Sans KR", sans-serif;
-			font-size:14px;
-			line-height:21px;
-		}
-		input.txt { width:296px; margin-left:5px; }
-		textarea.textarea:focus {outline:1px solid blue;}
-		.scroll-area {height:200px;overflow-y: scroll;}
-	</style>
-	
+	<link rel="stylesheet" type="text/css" href="vue.css" >
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  <!-- 개발자 버전 -->
 	<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> --> <!-- 상용 버전 -->
 	<script src="jquery-1.11.0.min.js"></script>
