@@ -1,0 +1,210 @@
+<html>
+<head>
+	<title> Vue.js </title>
+
+	<style>
+		html, body, h1, h2, h3, h4, h5, h6, p, div, th, td, table, pre, code, select, form, fieldset, legend, input, button, address, ol, ul, li, dl, dt, dd, img, textarea, blockquote {margin:0;padding:0;}
+		html, body {height:100%;}
+		body {background-color:#fff; padding:10px;}
+		body, input, button, select, textarea {font-family:"Malgun Gothic","맑은 고딕","dotum","돋움",sans-serif;font-size:100%;color:#666;line-height:1.5;}
+		button {font-size:80%;}
+		h1, h2, h3, h4, h5, h6 {color:#333;font-weight:normal;}
+		h6 {font-family:"Malgun Gothic","맑은 고딕","dotum","돋움",sans-serif;font-size:60%;color:#666;line-height:1.5; margin-top:5px;}
+		table {table-layout:fixed;width:100%;border-collapse:separate;border-spacing:0;}
+		ol, ul {list-style-type:none;}
+		a:link, a:visited, a:active {color:#666;text-decoration:none;}
+		a:hover, a:focus {text-decoration:none;}
+		textarea {overflow:auto;padding:7px 10px;resize:none;box-sizing:border-box;}
+		button {overflow:visible;display:inline-block;background:none;border:0;cursor:pointer;margin-top:10px;}
+		button, button:focus, button:active {padding:0;}
+		button > span {position:relative;}
+		button::-moz-focus-inner,
+		.btn.bg-white { background: #fff; padding:5px; border-radius: 15px;}
+		.btn.bg-blue { background: #7777aa; color:#fff; padding:5px; border-radius: 15px;}
+		.btn.bg-red { background: #e30000; color:#fff; padding:5px; border-radius: 15px;}
+		.radio-area.inc-ele [type="radio"] + label:before { top: 6px;}
+		.radio-area.inc-ele [type="radio"]:checked + label:after { top: 9px;}
+		.ellipsis {display:inline-block;overflow:hidden;max-width:95%;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.5px;}
+		[type="button"]::-moz-focus-inner,
+		[type="reset"]::-moz-focus-inner,
+		[type="submit"]::-moz-focus-inner {border-style:none;padding:0;}
+		.select-area {margin-top:30px; font-size:16px; padding:20px; border:1px solid #ccc;background-color:#eee;}
+		.select-area .lspace {padding:0 10px 0 20px;}
+		.select-area .tbspace {padding:10px 0;}
+		.span {float:left;margin-right:8px;font-size:15px;}
+		.span {color:#333;font-weight:bold;}
+		.code-area {margin-top:10px; font-size:70%; padding:10px; border:1px solid #ccc;background-color:#666; color:#fff;}
+		input, select, textarea {
+			color:#333;
+			font-size:100%;
+			font-family: "Noto Sans KR", sans-serif;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			vertical-align:top;
+		}
+		input[type='text'],
+		input[type='password'] {height:39px; padding:0 12px; border:1px solid #dcdcdc; background:#fff; font-size:14px; font-weight:500; color:#333; font-family: "Noto Sans KR", sans-serif; border-radius:0; -webkit-border-radius:0; -moz-border-radius:0;}
+		input[type='text']::-ms-clear {display:none;}
+		input[type='password']::-ms-reveal {display:none;}
+		*::-webkit-input-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
+		*::-moz-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
+		*:-ms-input-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
+		*:-moz-placeholder {color:#767676; font-family: "Noto Sans KR", sans-serif; font-weight:500;}
+		input[type='password']:disabled { background:#eee; }
+		textarea.textarea {
+			width:100%;
+			height:220px;
+			padding:12px;
+			border:1px solid #dcdcdc;
+			background:#fff;
+			font-family: "Noto Sans KR", sans-serif;
+			font-size:14px;
+			line-height:21px;
+		}
+		input.txt { width:296px; margin-left:5px; }
+		textarea.textarea:focus {outline:1px solid blue;}
+		.scroll-area {height:200px;overflow-y: scroll;}
+	</style>
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  <!-- 개발자 버전 -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> --> <!-- 상용 버전 -->
+	<script src="jquery-1.11.0.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		});
+		
+		function clickEvent() {
+			var example1 = new Vue({
+				el: '#example-1',
+				data: {
+					counter: 0
+				}
+			})
+			
+			var example2 = new Vue({
+				el: '#example-2',
+				data: {
+					name: 'Vue.js'
+				},
+				// 메소드는 `methods` 객체 안에 정의합니다
+				methods: {
+					greet: function (event) {
+						// 메소드 안에서 사용하는 `this` 는 Vue 인스턴스를 가리킵니다
+						alert('Hello ' + this.name + '!')
+						// `event` 는 네이티브 DOM 이벤트입니다
+						if (event) {
+							alert(event.target.tagName)
+						}
+					}
+				}
+			})
+			
+			var ynjch1 = new Vue({
+				el: '#ynjch1',
+				data: {
+					xvalue: 1,
+					yvalue: 1,
+					inpMsg: ''
+				},
+				methods: {
+					showNowtime: function (event) {
+						$("#nowtimeInp").val(new Date());
+					},
+					showMsg: function (alertYn) {
+						if ('Y' == alertYn) {
+							alert(this.inpMsg);
+						}
+					}
+				}
+			})
+		}
+	</script>
+</head>
+
+<body>
+
+	<button class="btn bg-red" onclick="javascript:clickEvent();"> 테스트 시작하려면 click </button> 
+	<button class="btn bg-red" onclick="javascript:location.reload();"> 새로고침 </button>
+	
+	<br><br>
+
+	<span class="span">📌 이벤트 핸들링 - 이벤트 청취</span>
+	<div class="select-area">
+		<div id="example-1">
+			<button class="btn bg-blue" v-on:click="counter += 1">Add 1</button>
+			<p>위 버튼을 클릭한 횟수는 {{ counter }} 번 입니다.</p>
+		</div>
+		<h6>
+			* v-on 디렉티브를 사용하여 DOM 이벤트를 듣고 트리거 될 때 JavaScript를 실행할 수 있음
+		</h6>
+		<div class="code-area">
+			<pre class="scroll-area">
+var example1 = new Vue({
+	el: '#example-1',
+	data: {
+		counter: 0
+	}
+})		
+
+&lt;div id="example-1"&gt;
+	&lt;button v-on:click="counter += 1">Add 1&lt;/button&gt;
+	&lt;p&gt;위 버튼을 클릭한 횟수는 {{ counter }} 번 입니다.&lt;/p&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+	</div>
+	
+	<br>
+	
+	<span class="span">📌 메소드 이벤트 핸들러</span>
+	<div class="select-area">
+		<div id="example-2">
+			<!-- `greet`는 메소드 이름으로 아래에 정의되어 있습니다 -->
+			<button class="btn bg-blue" v-on:click="greet">Greet</button>
+		</div>
+		<h6>
+			* v-on이 호출하고자 하는 메소드의 이름을 받아 사용함
+		</h6>
+		<div class="code-area">
+			<pre class="scroll-area">
+var example2 = new Vue({
+	el: '#example-2',
+	data: {
+		name: 'Vue.js'
+	},
+	// 메소드는 `methods` 객체 안에 정의합니다
+	methods: {
+		greet: function (event) {
+			// 메소드 안에서 사용하는 `this` 는 Vue 인스턴스를 가리킵니다
+			alert('Hello ' + this.name + '!')
+			// `event` 는 네이티브 DOM 이벤트입니다
+			if (event) {
+				alert(event.target.tagName)
+			}
+		}
+	}
+})	
+
+&lt;div id="example-2"&gt;
+	&lt;!-- `greet`는 메소드 이름으로 아래에 정의되어 있습니다 --&gt;
+	&lt;button v-on:click="greet">Greet&lt;/button&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+	</div>
+	
+	<br>
+	
+	<span class="span">📌 메소드 이벤트 핸들러 실습</span>
+	<div class="select-area">
+		<div id="ynjch1">
+			<button class="btn bg-blue" v-on:click="xvalue += 1">1씩 더한 값 X : {{ xvalue }}</button>
+			<button class="btn bg-blue" v-on:click="yvalue += xvalue">현재 값에 X 값 더하기 : {{ yvalue }}</button> <br>
+			<button class="btn bg-blue" v-on:click="showNowtime">현재 시각 보이기</button> <input type="text" id="nowtimeInp" class="txt" style="margin-top:5px; width:30%;"> <br>
+			<input type="text" class="txt" style="margin-top:5px; width:30%;" v-model="inpMsg"> <button class="btn bg-blue" v-on:click="showMsg('Y')">입력 값 alert로 띄우기</button>
+		</div>
+	</div>	
+
+</body>
+</html>
