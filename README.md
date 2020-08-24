@@ -13,6 +13,8 @@
 <br>
 2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL">MySQL</a> ver.200814
 <br>
+  1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query">MySQL Query</a> ver.200814
+<br> 
 
 <h4>리눅스</h4>
 1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Linux">리눅스</a> ver.200819
