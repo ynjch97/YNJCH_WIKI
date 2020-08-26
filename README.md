@@ -1,5 +1,5 @@
 <h4>프론트엔드</h4>
-1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/HTML">HTML</a> ver.200813 
+1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/HTML">HTML</a> ver.200826
 <br>
 2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/CSS">CSS</a> ver.200818
 <br>
