@@ -13,7 +13,7 @@
 <h4>백엔드</h4>
 1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/JAVA">JAVA</a> ver.200901
 <br>
-1-1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/JAVA-Annotation">JAVA Annotation</a> ver.200901
+  1-1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/JAVA-Annotation">JAVA Annotation</a> ver.200901
 <br>
 2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL">MySQL</a> ver.200824
 <br>
