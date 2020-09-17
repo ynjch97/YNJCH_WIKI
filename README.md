@@ -23,7 +23,7 @@
 <h4>리눅스</h4>
 1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Linux">리눅스</a> ver.200819
 <br>
-2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Linux--%EB%AA%85%EB%A0%B9%EC%96%B4">리눅스 명령어</a> ver.200819
+2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Linux--%EB%AA%85%EB%A0%B9%EC%96%B4">리눅스 명령어</a> ver.200917
 <br>
 
 <h4>기타</h4>
