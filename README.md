@@ -31,5 +31,5 @@
 <br>
 2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Eclipse">Eclipse 사용 팁</a> ver.200909
 <br>
-3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Git">Git</a> ver.201007
+3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Git">Git</a> ver.201008
 <br>
