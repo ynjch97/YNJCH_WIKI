@@ -1,0 +1,423 @@
+<script src="jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=35pupqwj0c"></script>
+
+<!-- container -->
+<div id="container" tabindex="0">
+	
+	<div id="ynjchDirection" style="margin-left:10%; margin-top:50px; width:80%;height:500px;">
+		<div class="buttons" style="position: absolute; display: block; margin: 0px; padding: 0px; border: 0px none; top: 0px; left: 0px; overflow: visible; width: 100%; height: 50px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); z-index: 100;">
+			출발점 좌표
+	        <input id="startX" type="text" value="startX">
+	        <input id="startY" type="text" value="startY">
+	       	도착점 좌표
+	        <input id="goalX" type="text" value="goalX">
+	        <input id="goalY" type="text" value="goalY">
+	        <input id="searchDirection" type="button" value="길 찾기" class="control-btn" onClick="searchDirection();">
+	    </div>
+	</div>
+	
+	
+	<div class="content-width">
+		<div id="ynjchDirResult" class="page-sub-title-style pans clearfix">
+			<h3 class="sub-title">길찾기 결과</h3>
+			<ul>
+				<li name="code">결과 코드 : <span></span></li>
+				<li name="msg">결과 : <span></span></li>
+				<li name="distance">전체 경로 거리 : <span></span></li>
+				<li name="time">예상 소요시간 : <span></span></li>
+			</ul>
+			<h4 class="sub-title-text3">경로 안내</h4>
+			<table class="base-table">
+				<thead>
+					<tr>
+						<th scope="col" class="long-txt">안내 문구</th>
+						<th scope="col">거리</th>
+						<th scope="col">소요시간</th>
+					</tr>
+				</thead>
+				<tbody id="ynjchDirRoute">
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div id="ynjchMap" style="margin-left:10%; margin-top:50px; width:80%;height:500px;">
+		<div class="buttons" style="position: absolute; display: block; margin: 0px; padding: 0px; border: 0px none; top: 0px; left: 0px; overflow: visible; width: 100%; height: 50px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); z-index: 100;">
+			출발점 좌표
+	        <input id="naverX" type="text" value="37.3595704">
+	        <input id="naverY" type="text" value="127.105399">
+			마커와의 직선 거리 
+	        <input id="distance" type="text" value="">
+	    </div>
+	</div>
+
+	<div id="yjMap" style="margin-left:10%; margin-top:50px; width:80%;height:500px;">
+	</div>
+	
+</div>
+<!-- //container -->
+
+<script type="text/javascript">
+
+	// 맵 초기화
+	var map = null;
+	var direction = null;
+	
+	// 직선거리 맵
+	var naverLoc = new naver.maps.LatLng($("#naverX").val(), $("#naverY").val()); 
+	var naverMarker = null;
+	var polyline = null;
+	var mapMarkers = [];
+	
+	// 길찾기 맵 
+	var startLoc = null;
+	var goalLoc = null;
+	var dirMarkers = [];
+	var dirPolyline = new naver.maps.Polyline({
+	    map: direction,
+	    path: [],
+	    strokeColor: '#5347AA',
+	    strokeWeight: 2
+	});
+	var dirPath = [];
+	
+	// 인포창
+	var naverInfoStr = [
+	        '<div class="iw_inner">',
+	        '   <h3>서울특별시청</h3>',
+	        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
+	        '       <img src="https://ssl.pstatic.net/static/help/img/img_logo_naver_200X200.png" width="55" height="55" alt="서울시청" class="thumb" /><br />',
+	        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
+	        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
+	        '   </p>',
+	        '</div>'
+	    ].join('');
+	var naverInfoWindow = new naver.maps.InfoWindow({
+	    content: naverInfoStr
+	});
+	
+	// yj맵
+	var yjMap = null;
+	var yjLoc = new naver.maps.LatLng("35.8362584", "129.2171193"); 
+	var yjPolyline = null;
+    var yjPath = [];
+	var yjMarker = null;
+	var yjMarkers = [];
+	
+	$(function () {
+		// 길찾기 맵 초기화 및 마커 이벤트
+		initDirection();
+		dirMarkerEvnt();
+
+		// 직선거리 맵 초기화 및 마커 이벤트
+		initMap();
+		markerEvnt();
+		
+		// yj맵 초기화 및 마커 이벤트
+		initYjMap();
+		yjMarkerEvnt();
+		
+		// 인포창 클릭 이벤트 
+		naverInfoEvnt();
+		// 인포창 열어놓기
+		naverInfoWindow.open(map, naverMarker);
+		
+		// esc 키 이벤트
+		$(document).keydown(function(event) {
+		    if ( event.keyCode == 27 || event.which == 27 ) {
+		        // 이전 도착 지점의 path 정보 삭제
+		    	if (yjPath.length > 1) {    	    		
+			        yjPath.pop();
+		    	}
+		    	
+		    	// 이전 도착 지점의 마커 삭제
+	    		if (yjMarkers.length > 1) {    				
+	    			yjMarkers[yjMarkers.length - 1].setMap(null);
+	    			yjMarkers.pop();
+    			}
+		    }
+		});
+		
+	});
+	
+	// 길찾기 맵 초기화 
+	function initDirection() {
+		var mapOptions = {
+		    center: yjLoc,
+		    zoom: 15
+		};
+		
+		direction = new naver.maps.Map('ynjchDirection', mapOptions);
+	}
+	
+	// 맵 초기화
+	function initMap() {
+		var mapOptions = {
+		    center: naverLoc,
+		    zoom: 10
+		};
+		
+	    map = new naver.maps.Map('ynjchMap', mapOptions);
+	 	
+	    // 폴리라인 정의
+	    polyline = new naver.maps.Polyline({
+		    map: map,
+		    path: [],
+		    strokeColor: '#A566FF',
+		    strokeWeight: 2
+		});
+	    
+	    // 선 긋기
+	    var path = polyline.getPath();
+	    path.push(naverLoc);
+
+	    // 마커 찍기
+	    naverMarker = new naver.maps.Marker({
+	        position: naverLoc,
+	        map: map
+	    });
+
+	    // 마커 저장
+	    mapMarkers.push(naverMarker);
+	}
+	
+	// 길찾기 맵 마커 표시 이벤트
+	function dirMarkerEvnt() {
+		naver.maps.Event.addListener(direction, 'click', function(e) {
+			var point = e.coord;
+			console.log("point : " + point);
+
+			switch (dirMarkers.length) {
+			case 0:
+				// 출발점 찍음
+				$("#startX").val(point.x);
+				$("#startY").val(point.y);
+				break;
+			case 1:
+				// 도착점 찍음
+				$("#goalX").val(point.x);
+				$("#goalY").val(point.y);
+		    	break;
+			case 2: 
+				// 모두 찍었으므로 초기화 - 이전 마커 정보 삭제
+		    	for(var i = 0; i < dirMarkers.length; i++){
+		    		dirMarkers[i].setMap(null);
+	    		}
+
+		    	dirMarkers = [];
+
+				// 출발점 찍음
+				$("#startX").val(point.x);
+				$("#startY").val(point.y);
+		    	break;
+			}
+			
+			// 마커 찍기
+		    var newMarker = new naver.maps.Marker({
+		        map: direction,
+		        position: point
+		    });
+		    
+		    // 마커 저장
+		    dirMarkers.push(newMarker);
+		});
+	}
+	
+	// 맵 마커 표시 이벤트
+	function markerEvnt() {
+		naver.maps.Event.addListener(map, 'click', function(e) {
+		    var point = e.coord;
+		    var path = polyline.getPath();
+		    var pathLength = Number(path.length);
+
+		    // 도착 지점을 이미 표시했다면 
+		    if (pathLength == 2) {
+		    	// 이전 도착 지점의 path 정보 삭제
+		    	path.pop();
+		    	
+		    	// 이전 도착 지점의 마커 삭제
+		    	for(var i = 0; i < mapMarkers.length; i++){
+	    			if (i != 0) {    				
+			    		mapMarkers[i].setMap(null);
+	    			}
+	    		}
+		    }
+		    
+		 	// 선 긋기
+		    path.push(point);
+
+		    // 마커 찍기
+		    var newMarker = new naver.maps.Marker({
+		        map: map,
+		        position: point
+		    });
+		    
+		    // 마커 저장
+		    mapMarkers.push(newMarker);
+		    
+		    var proj = map.getProjection();
+		    var distance = proj.getDistance(naverLoc, point) / 1000;
+		    distance = distance.toFixed(1);
+		    $("#distance").val(distance + " km");
+		    
+		    console.log(point);
+		});
+	}
+	
+	// 네이버 마커 클릭 이벤트 (인포창)
+    function naverInfoEvnt() {
+    	naver.maps.Event.addListener(naverMarker, "click", function(e) {
+    	    if (naverInfoWindow.getMap()) {
+    	    	naverInfoWindow.close();
+    	    } else {
+    	    	naverInfoWindow.open(map, naverMarker);
+    	    }
+    	});
+	}
+    
+	// 길 찾기 버튼 이벤트
+	function searchDirection(){
+		var start = $("#startX").val() + "," + $("#startY").val();
+		var goal = $("#goalX").val() + "," + $("#goalY").val();
+		console.log("start : " + start);
+		console.log("goal : " + goal);
+		
+		// 초기화
+		$("#ynjchDirRoute").empty();
+		dirPolyline.setMap(null);
+	    dirPath = dirPolyline.getPath();
+		
+	    // 길찾기 실행
+		$.ajax({
+	        type : "POST",
+	        async: false,
+	        dataType : "json",
+	        traditional: true,
+	        url : '${pageContext.request.contextPath}/naver/getDirection.do',
+	        data : {
+        		"start" : start,
+        		"goal" : goal,
+        		"X-NCP-APIGW-API-KEY-ID" : "35pupqwj0c",
+        		"X-NCP-APIGW-API-KEY" : "v6RAcKOqTLjVRDELgW0r2GTAfkoo2kr8zEPS3dA0"
+	        },
+	        error: function(xhr, status, error){
+	            console.log('에러' + xhr);
+ 	            console.log('에러' + status);
+	            console.log('에러' + error);
+	        },
+	        success : function(data){
+	        	setDirection(data.data.directinoInfo);
+	        }
+	    });	
+	}
+	
+	// 길 찾기 결과 반영
+	function setDirection(data) {
+    	var code = data.code;
+    	var currentDateTime = data.currentDateTime;
+    	var message = data.message;
+    	var route = data.route;
+    	var guideArr = [];
+    	var pathArr = [];
+    	var $target = $("#ynjchDirResult"); // div
+    	var $tbody = $("#ynjchDirRoute"); // tbody
+
+    	// 실행 결과 바인딩
+    	$target.find("ul li[name='code']").find("span").text(code);
+    	$target.find("ul li[name='msg']").find("span").text(message + " (" + currentDateTime + ")");
+
+    	if (code == 0) { // 성공적으로 조회 시 
+    		switch (false) { // 조회한 option의 데이터로 세팅
+    		case (typeof route.trafast == "undefined"):
+    			route = route.trafast[0];
+    			break;
+    		case (typeof route.tracomfort == "undefined"):
+				route = route.tracomfort[0];
+    			break;
+    		case (typeof route.traoptimal == "undefined"):
+				route = route.traoptimal[0];
+    			break;
+    		case (typeof route.traavoidtoll == "undefined"):
+				route = route.traavoidtoll[0];
+    			break;
+    		case (typeof route.traavoidcaronly == "undefined"):
+				route = route.traavoidcaronly[0];
+    			break;
+    		}
+
+        	// 길찾기 조회 결과 바인딩
+    		var routeDistance = route.summary.distance / 1000;
+    		var routeDuration = route.summary.duration / (1000 * 60);
+    		$target.find("ul li[name='distance']").find("span").text(routeDistance.toFixed(1) + "km");
+    		$target.find("ul li[name='time']").find("span").text(Math.round(routeDuration) + "분 (택시 요금 " + route.summary.taxiFare + "원)");
+    		
+    		// 경로 바인딩
+    		guideArr = route.guide;
+    		for (var i=0; i<guideArr.length; i++) {
+    			var guideDuration = guideArr[i].duration / (1000 * 60);
+        		var sHtml = '<tr>';
+        		sHtml += '<th scope="row">' + guideArr[i].instructions + '</th>';
+        		sHtml += '	<td>' + guideArr[i].distance + 'm</td>';
+       			sHtml += '	<td>' + Math.round(guideDuration) + '분</td>';
+    			sHtml += '</tr>';
+    			
+    			$tbody.append(sHtml);
+    		}
+    		
+    		// 경로에 따른 폴리라인 그리기 
+    		pathArr = route.path;
+    	    dirPolyline = new naver.maps.Polyline({
+    		    map: direction,
+    		    path: [],
+    		    strokeColor: '#5347AA',
+    		    strokeWeight: 2
+    		});
+    	    dirPath = dirPolyline.getPath();
+    	    
+    	    // 경로에 따른 폴리라인 그리기 - 선 긋기
+    		for (var i=0; i<pathArr.length; i++) {
+        	    var pathLoc = new naver.maps.LatLng(String(pathArr[i]).split(',')[1], String(pathArr[i]).split(',')[0]); 
+	            dirPath.push(pathLoc);
+	            console.log("pathLoc 은 >>> " + pathLoc);
+    		}
+    	}
+	}
+	
+	// yj 맵 초기화
+	function initYjMap() {
+		var mapOptions = {
+		    center: yjLoc,
+		    zoom: 15
+		};
+		
+		yjMap = new naver.maps.Map('yjMap', mapOptions);
+		
+		yjPolyline = new naver.maps.Polyline({
+		    map: yjMap,
+		    path: [],
+		    strokeColor: '#C90000',
+		    strokeWeight: 2
+		});
+	}
+	
+	// yj 맵 마커 표시 이벤트
+	function yjMarkerEvnt() {
+		naver.maps.Event.addListener(yjMap, 'click', function(e) {
+		    var point = e.coord;
+		    yjPath = yjPolyline.getPath();
+
+		 	// 선 긋기
+		    yjPath.push(point);
+
+		    // 마커 찍기
+		    yjMarker = new naver.maps.Marker({
+		        map: yjMap,
+		        position: point
+		    });
+		    
+		    // 마커 저장
+		    yjMarkers.push(yjMarker);
+		});
+	}
+	
+</script>

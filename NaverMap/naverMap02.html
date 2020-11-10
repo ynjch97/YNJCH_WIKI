@@ -1,0 +1,253 @@
+<script src="jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=35pupqwj0c"></script>
+
+<!-- container -->
+<div id="container" tabindex="0">
+	
+	<div id="ynjchMap" style="margin-left:20%; margin-top:50px; width:60%;height:400px;">
+	</div>
+	
+</div>
+<!-- //container -->
+
+<script type="text/javascript">
+
+	// 맵 초기화
+	var map = null;
+	var mapLoc = new naver.maps.LatLng("37.5473626", "127.0642818"); 
+	
+	// 출발, 도착지 좌표
+	var startTitle = ["삼환벤처타워", "성수역", "주민센터"];
+	var goalTitle = ["성동세무서", "어니언", "어린이대공원역"];
+	var startX = ["127.064314", "127.056085", "127.0714057"];
+	var startY = ["37.5472861", "37.544547", "37.5465035"];
+	var goalX = ["127.0628334", "127.0582093", "127.0743669"];
+	var goalY = ["37.5484429", "37.5447682", "37.5474562"];
+	var startLoc = null;
+	var goalLoc = null;
+	
+	// 마커와 폴리라인 
+	var dirMarker = null;
+	var dirMarkers = [];
+	var dirPolyline = new naver.maps.Polyline({
+	    map: map,
+	    path: [],
+	    clickable: true,
+	    strokeColor: '#5347AA',
+	    strokeWeight: 3
+	});
+	var dirPolylines = [];
+	var polylineColor = ["#C90000", "#4641D9", "#2F9D27"];
+	var dirPath = [];
+	
+	// 인포창
+	var infoStr = null;
+	var infoWindow = null;
+	var infoWindows = [];
+	
+	$(function () {
+		// 맵 초기화 및 마커 이벤트
+		initMap();
+	});
+	
+	// 맵 초기화
+	function initMap() {
+		var mapOptions = {
+		    center: mapLoc,
+		    zoom: 15
+		};
+		
+	    map = new naver.maps.Map('ynjchMap', mapOptions);
+	    
+	    for (var i=0; i<startX.length; i++) {
+	    	// 길찾기 실행
+	    	searchDirection(startX[i], startY[i], goalX[i], goalY[i], i); 
+	    	
+	    	// 출발점, 도착점 좌표 세팅
+	    	startLoc = new naver.maps.LatLng(startY[i], startX[i]);
+	    	goalLoc = new naver.maps.LatLng(goalY[i], goalX[i]);
+	    	
+	    	// 마커 표시
+			setMarker(startLoc, goalLoc);
+			// 인포창 표시
+	    	setInfo(i);
+			// 인포창 마우스오버 이벤트
+	    	infoClickListener(i);
+			// 폴리라인 마우스오버 & 클릭 이벤트
+			polylineOverListener(i);
+	    }
+	}
+	
+	// 길 찾기 실행
+	function searchDirection(startX, startY, goalX, goalY, startXCnt){
+		var start = startX + "," + startY;
+		var goal = goalX + "," + goalY;
+		
+	    // 길찾기 실행
+		$.ajax({
+	        type : "POST",
+	        async: false,
+	        dataType : "json",
+	        traditional: true,
+	        url : '${pageContext.request.contextPath}/naver/getDirection.do',
+	        data : {
+        		"start" : start,
+        		"goal" : goal,
+        		"X-NCP-APIGW-API-KEY-ID" : "35pupqwj0c",
+        		"X-NCP-APIGW-API-KEY" : "v6RAcKOqTLjVRDELgW0r2GTAfkoo2kr8zEPS3dA0"
+	        },
+	        error: function(xhr, status, error){
+	            console.log('에러' + error);
+	        },
+	        success : function(data){
+	        	var code = data.data.directinoInfo.code;
+	        	if (code == 0) {
+	        		setDirection(data.data.directinoInfo, startXCnt);
+	        	}
+	        }
+	    });	 
+	}
+	
+	// 길 찾기 결과 반영
+	function setDirection(data, startXCnt) {
+    	var currentDateTime = data.currentDateTime;
+    	var message = data.message;
+    	var route = data.route;
+    	route = route.traoptimal[0];
+    	var pathArr = [];
+
+   		// 경로에 따른 폴리라인 그리기 
+   		pathArr = route.path;
+
+   		dirPolyline = new naver.maps.Polyline({
+   		    map: map,
+   		    path: [],
+   		    clickable: true,
+   		    strokeColor: polylineColor[startXCnt],
+   		    strokeWeight: 3
+   		});
+   	    dirPath = dirPolyline.getPath();
+   	    
+   	    // 경로에 따른 폴리라인 그리기 - 선 긋기
+   		for (var i=0; i<pathArr.length; i++) {
+       	    var pathLoc = new naver.maps.LatLng(String(pathArr[i]).split(',')[1], String(pathArr[i]).split(',')[0]); 
+            dirPath.push(pathLoc);
+   		}
+   	    
+   		dirPolylines.push(dirPolyline);
+	}
+	
+	// 마커 표시 
+	function setMarker(startLoc, goalLoc) {
+		// 출발 마커
+		dirMarker = new naver.maps.Marker({
+	        position: startLoc,
+	        map: map,
+	        title: '출발',
+	        icon: {
+                content: ['<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Button_Icon_GreenYellow.svg/300px-Button_Icon_GreenYellow.svg.png" alt="" ' +
+                         'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
+                         '-webkit-user-select: none; position: absolute; width: 15px; height: 15px; left: 0px; top: 0px;">'].join(''),
+                size: new naver.maps.Size(15, 15),
+                anchor: new naver.maps.Point(10, 10)
+            }
+	    });
+		dirMarkers.push(dirMarker);
+		
+		// 도착 마커
+		dirMarker = new naver.maps.Marker({
+	        position: goalLoc,
+	        map: map,
+	        title: '도착',
+	        icon: {
+                content: ['<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Button_Icon_Red.svg/768px-Button_Icon_Red.svg.png" alt="" ' +
+                         'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
+                         '-webkit-user-select: none; position: absolute; width: 15px; height: 15px; left: 0px; top: 0px;">'].join(''),
+                size: new naver.maps.Size(15, 15),
+                anchor: new naver.maps.Point(10, 10)
+            }
+	    });
+		dirMarkers.push(dirMarker);
+	}
+	
+	// 인포창 표시
+	function setInfo(startXCnt) {
+		console.log(startTitle[startXCnt] + " - " + goalTitle[startXCnt]);
+		
+		// 출발지 인포창
+		infoStr = [
+	        '<div class="iw_inner">',
+	        '   <h3>' + startTitle[startXCnt] + '</h3>',
+	        '   <p>서울특별시 광진구<br />',
+	        '       <img src="https://ssl.pstatic.net/static/help/img/img_logo_naver_200X200.png" width="55" height="55" alt="서울시청" class="thumb" />',
+	        '   </p>',
+	        '</div>'
+	    ].join('');
+		infoWindow = new naver.maps.InfoWindow({
+		    content: infoStr
+		});
+		
+	    infoWindows.push(infoWindow);
+		
+		// 도착지 인포창
+		infoStr = [
+	        '<div class="iw_inner">',
+	        '   <h3>' + goalTitle[startXCnt] + '</h3>',
+	        '   <p>서울특별시 광진구<br />',
+	        '       <img src="https://ssl.pstatic.net/static/help/img/img_logo_naver_200X200.png" width="55" height="55" alt="서울시청" class="thumb" />',
+	        '   </p>',
+	        '</div>'
+	    ].join('');
+		infoWindow = new naver.maps.InfoWindow({
+		    content: infoStr
+		});
+		
+	    infoWindows.push(infoWindow);
+	}
+
+	// 인포창 마우스오버 이벤트
+	function infoClickListener(startXCnt) {
+		startXCnt = startXCnt * 2;
+		
+		// 출발지
+		naver.maps.Event.addListener(dirMarkers[startXCnt], "mouseover", function(e) {
+			infoWindows[startXCnt].open(map, dirMarkers[startXCnt]);
+    	});
+		naver.maps.Event.addListener(dirMarkers[startXCnt], "mouseout", function(e) {
+			infoWindows[startXCnt].close();
+    	});
+		
+		// 도착지
+		naver.maps.Event.addListener(dirMarkers[startXCnt + 1], "click", function(e) {
+    	    if (infoWindows[startXCnt + 1].getMap()) {
+    	    	infoWindows[startXCnt + 1].close();
+    	    } else {
+    	    	infoWindows[startXCnt + 1].open(map, dirMarkers[startXCnt + 1]);
+    	    }
+    	});
+	}
+	
+	// 폴리라인 마우스오버 & 클릭 이벤트
+	function polylineOverListener(startXCnt) {
+		naver.maps.Event.addListener(dirPolylines[startXCnt], 'mouseover', function() {
+			dirPolylines[startXCnt].setOptions({
+		        strokeColor: '#FFBB00',
+		        strokeStyle: 'solid',
+		        strokeOpacity: 3
+		    });
+		});
+		
+		naver.maps.Event.addListener(dirPolylines[startXCnt], 'mouseout', function() {
+			dirPolylines[startXCnt].setOptions({
+		        strokeColor: polylineColor[startXCnt],
+		        strokeStyle: 'solid',
+		        strokeOpacity: 3
+		    });
+		});
+		
+		naver.maps.Event.addListener(dirPolylines[startXCnt], 'click', function() {
+			alert((startXCnt + 1) + "번째 폴리라인");
+		});
+	}
+	
+</script>
