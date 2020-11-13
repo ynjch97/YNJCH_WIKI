@@ -1,0 +1,306 @@
+<script src="jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=35pupqwj0c"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=35pupqwj0c&submodules=geocoder"></script>
+
+<!-- container -->
+<div id="container" tabindex="0">
+	
+	<div id="ynjchMap" style="margin-left:10%; margin-top:50px; width:80%;height:500px;">
+	</div>
+	
+	<button id="nextBtn" class="btn-big-white" onclick="javascript:btnClick();" style="margin-left:20%; margin-top:50px; width:60%;height:50px;" disabled="disabled">다음으로 이동</button>
+	
+	<div id="nextBtn" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 15px; height: 15px; left: 0px; top: 0px;">다음으로 이동</div>
+	
+	<div style="margin-left:10%; margin-top:50px; width:80%;height:500px;">
+		<ul>
+			<li>trafast : 실시간 빠른길</li>
+			<li>tracomfort : 실시간 편한길</li>
+			<li>traoptimal : 실시간 최적</li>
+			<li>traavoidtoll : 무료 우선</li>
+			<li>traavoidcaronly : 자동차 전용도로 회피 우선</li>
+		</ul>
+	</div>
+
+</div>
+<!-- //container -->
+
+<script>
+	// 맵 초기화
+	var map = null;
+	var mapLoc = new naver.maps.LatLng("37.5473626", "127.0642818"); 
+	
+	// 출발, 도착지 좌표
+	/* var startAddr = [];
+	var goalAddr = []; */
+	var startTitle = ["삼환벤처타워", 		"성수역", 		"주민센터", 		"CGV 건대점", 	"세종대학교", 		"화양동우체국", 	"서울숲역",		"건대입구역",		"화양초등학교",		"메가박스 군자"];
+	var goalTitle =  ["성동세무서",		"어니언", 		"어린이대공원역", 	"성삼 어린이공원", 	"능동소공원", 		"일성파크 아파트", 	"뚝섬역",			"구의역",			"광진소방서",		"선화예술고등학교"];
+	var startX = 	 ["127.064314", 	"127.056085", 	"127.0714057", 	"127.0669533", 	"127.0739056", 	"127.0694638", 	"127.0446695",	"127.0705903",	"127.0710195",	"127.0784438"];
+	var startY = 	 ["37.5472861", 	"37.544547", 	"37.5465035", 	"37.5398001", 	"37.551386", 	"37.5479241", 	"37.5433135",	"37.5398597",	"37.5442833",	"37.5556814"];
+	var goalX =  	 ["127.0628334", 	"127.0582093", 	"127.0743669", 	"127.060237", 	"127.0830358", 	"127.0724572", 	"127.0474161",	"127.0862115",	"127.0828212",	"127.0877565"];
+	var goalY =  	 ["37.5484429", 	"37.5447682", 	"37.5474562", 	"37.542046", 	"37.5525173", 	"37.5514796", 	"37.5472606",	"37.5370692",	"37.5448958",	"37.5499315"];
+	var startLoc = null;
+	var goalLoc = null;
+	
+	// 마커와 폴리라인 
+	var dirMarker = null;
+	var dirMarkers = [];
+	var dirPolyline = null;
+	var dirPolylines = [];
+	var dirPath = [];
+	var clickYn = []; // 경로 클릭 여부 (startX 개수만큼 세팅)
+	
+	// 인포창
+	var infoWindows = [];
+	
+	$(function () {
+		// 맵 초기화 및 마커 이벤트
+		initMap();
+	});
+	
+	// 맵 초기화
+	function initMap() {
+		var mapOptions = {
+		    center: mapLoc,
+		    zoom: 14,
+            minZoom: 12,
+            maxZoom: 17
+		};
+		
+	    map = new naver.maps.Map('ynjchMap', mapOptions);
+	    
+	    for (var i=0; i<startX.length; i++) {
+	    	// 클릭 여부 
+	    	clickYn.push("N");
+	    	
+	    	// 길찾기 실행
+	    	searchDirection(startX[i], startY[i], goalX[i], goalY[i]); 
+	    	
+	    	// 출발점, 도착점 좌표 세팅
+	    	startLoc = new naver.maps.LatLng(startY[i], startX[i]);
+	    	goalLoc = new naver.maps.LatLng(goalY[i], goalX[i]);
+	    	
+	    	// 마커 표시
+	    	setMarker(startLoc, "출발", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Button_Icon_GreenYellow.svg/300px-Button_Icon_GreenYellow.svg.png");
+	    	setMarker(goalLoc, "도착", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Button_Icon_Red.svg/768px-Button_Icon_Red.svg.png");
+			
+	    	// 인포창 표시
+	    	setInfo(startTitle, i);
+	    	setInfo(goalTitle, i);
+			
+	    	// 인포창 마우스오버 이벤트
+	    	infoClickListener(i);
+			
+	    	// 폴리라인 마우스오버 & 클릭 이벤트
+			polylineOverListener(i);
+	    } 
+	}
+	
+	// 길 찾기 실행
+	function searchDirection(startX, startY, goalX, goalY){
+		var start = startX + "," + startY;
+		var goal = goalX + "," + goalY;
+		
+	    // 길찾기 실행
+		$.ajax({
+	        type : "POST",
+	        async: false,
+	        dataType : "json",
+	        traditional: true,
+	        url : '${pageContext.request.contextPath}/naver/getDirection.do',
+	        data : {
+        		"start" : start,
+        		"goal" : goal,
+        		"option" : "traavoidcaronly",
+        		"X-NCP-APIGW-API-KEY-ID" : "35pupqwj0c",
+        		"X-NCP-APIGW-API-KEY" : "v6RAcKOqTLjVRDELgW0r2GTAfkoo2kr8zEPS3dA0"
+	        },
+	        error: function(xhr, status, error){
+	            console.log('에러' + error);
+	        },
+	        success : function(data){
+	        	var code = data.data.directinoInfo.code;
+	        	if (code == 0) {
+	        		setDirection(data.data.directinoInfo);
+	        	}
+	        }
+	    });	 
+	}
+	
+	// 길 찾기 결과 반영
+	function setDirection(data) {
+    	/* var currentDateTime = data.currentDateTime;
+    	var message = data.message; */
+    	var route = data.route;
+    	route = route.traavoidcaronly[0]; //
+    	var pathArr = route.path; //경로 정보
+
+   		// 폴리라인 초기화
+   		dirPolyline = new naver.maps.Polyline({
+   		    map: map,
+   		    path: [],
+   		    clickable: true,
+   		    strokeColor: '#C90000',
+   		    strokeWeight: 3
+   		});
+   	    dirPath = dirPolyline.getPath();
+   	    
+   	    // 경로에 따른 폴리라인 그리기 - 선 긋기
+   		for (var i=0; i<pathArr.length; i++) {
+       	    var pathLoc = new naver.maps.LatLng(String(pathArr[i]).split(',')[1], String(pathArr[i]).split(',')[0]); 
+            dirPath.push(pathLoc);
+   		}
+   	    
+   		dirPolylines.push(dirPolyline);
+	}
+
+	// 주소 세팅
+	/* function setAddr(startLoc, goalLoc) {
+		// 출발지 좌표->주소 변환
+		naver.maps.Service.reverseGeocode({
+	        location: startLoc,
+	    }, function(status, response) {
+	        if (status !== naver.maps.Service.Status.OK) {
+	            return alert('Something wrong!');
+	        } else {
+	        	var result = response.result.items; // 검색 결과
+	        	result = result[0].address;
+	        	console.log("출발 : " + result);
+	        	startAddr.push(result);
+	        }
+	    });
+
+		// 도착지 좌표->주소 변환
+		naver.maps.Service.reverseGeocode({
+	        location: goalLoc,
+	    }, function(status, response) {
+	        if (status !== naver.maps.Service.Status.OK) {
+	            return alert('Something wrong!');
+	        } else {
+	        	var result = response.result.items; // 검색 결과
+	        	result = result[0].address;
+	        	console.log("도착 : " + result);
+	        	goalAddr.push(result);
+	        }
+	    });
+	} */
+	
+	// 마커 표시 
+	function setMarker(positionLoc, titleTxt, iconImg) {
+		// 출발, 도착 마커
+		dirMarker = new naver.maps.Marker({
+	        position: positionLoc,
+	        map: map,
+	        title: titleTxt,
+	        icon: {
+                content: ['<img src="' + iconImg + '" alt="" ' +
+                         'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
+                         '-webkit-user-select: none; position: absolute; width: 15px; height: 15px; left: 0px; top: 0px;">'].join(''),
+                size: new naver.maps.Size(15, 15),
+                anchor: new naver.maps.Point(10, 10)
+            }
+	    });
+		dirMarkers.push(dirMarker);
+	}
+	
+	// 인포창 표시
+	function setInfo(arrTitle, startXCnt) {
+		// 출발지, 도착지 인포창
+		var infoStr = [
+	        '<div class="iw_inner">',
+	        '   <h3>' + arrTitle[startXCnt] + '</h3>',
+	        '</div>'
+	    ].join('');
+		var infoWindow = new naver.maps.InfoWindow({
+		    content: infoStr
+		});
+		
+	    infoWindows.push(infoWindow);
+	}
+
+	// 인포창 마우스오버 이벤트
+	function infoClickListener(startXCnt) {
+		startXCnt = startXCnt * 2;
+		
+		// 출발지
+		naver.maps.Event.addListener(dirMarkers[startXCnt], "mouseover", function(e) {
+			infoWindows[startXCnt].open(map, dirMarkers[startXCnt]);
+    	});
+		naver.maps.Event.addListener(dirMarkers[startXCnt], "mouseout", function(e) {
+			infoWindows[startXCnt].close();
+    	});
+		
+		// 도착지
+		naver.maps.Event.addListener(dirMarkers[startXCnt + 1], "mouseover", function(e) {
+			infoWindows[startXCnt + 1].open(map, dirMarkers[startXCnt + 1]);
+    	});
+		naver.maps.Event.addListener(dirMarkers[startXCnt + 1], "mouseout", function(e) {
+			infoWindows[startXCnt + 1].close();
+    	});
+	}
+	
+	// 폴리라인 마우스오버 & 클릭 이벤트
+	function polylineOverListener(startXCnt) {
+		// 마우스 오버 시 폴리라인 색상 노란색으로 변경
+		naver.maps.Event.addListener(dirPolylines[startXCnt], 'mouseover', function() {
+			dirPolylines[startXCnt].setOptions({
+		        strokeColor: '#FFBB00',
+		        strokeStyle: 'solid',
+		        strokeOpacity: 3
+		    });
+		});
+		
+		naver.maps.Event.addListener(dirPolylines[startXCnt], 'mouseout', function() {
+			var colorVal = '#C90000';
+			if (clickYn[startXCnt] == "Y") { // 이미 클릭했으면 마우스 아웃 시에도 회색 유지 
+				colorVal = '#777777';
+			}
+			
+			dirPolylines[startXCnt].setOptions({
+		        strokeColor: colorVal,
+		        strokeStyle: 'solid',
+		        strokeOpacity: 3
+		    });
+		});
+		
+		// 클릭 시 폴리라인 색상 회색으로 변경 + 버튼 클릭 활성화 체크
+		naver.maps.Event.addListener(dirPolylines[startXCnt], 'click', function() {
+			dirPolylines[startXCnt].setOptions({
+		        strokeColor: '#777777',
+		        strokeStyle: 'solid',
+		        strokeOpacity: 3
+		    });
+			clickYn[startXCnt] = "Y" // 클릭 여부 체크
+			
+			// 클릭한 경로로 이동 
+			var poliylineHalf = Math.round(dirPolylines[startXCnt].path.length / 2);
+			var centerLoc = dirPolylines[startXCnt].path._array[poliylineHalf]; // 포커스 이동할 경로 중앙의 좌표
+			map.setCenter(centerLoc); // 포커스 이동
+			map.setZoom(16, true); // 줌인 
+			
+			// 클릭된 경로 개수 확인하여 버튼 활성화 
+			btnStatChk();
+		});
+	}
+	
+	// 클릭된 경로 개수 확인하여 버튼 활성화 
+	function btnStatChk() {
+		var clickCnt = 0; // 클릭된 경로 개수
+		for (var i=0; i<clickYn.length; i++) {
+			if (clickYn[i] == "Y") {
+				clickCnt += 1;
+			}
+		}
+		
+		if (clickCnt > 1) {
+			$('#nextBtn').attr('disabled', false); // 버튼 활성화
+			$('#nextBtn').removeClass("btn-big-white");
+			$('#nextBtn').addClass("btn-big-orange")
+		}
+	}
+	
+	// 버튼 클릭 이벤트 
+	function btnClick() {
+		console.log("버튼 클릭 이벤트 !");
+	}
+</script>
