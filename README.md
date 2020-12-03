@@ -15,7 +15,7 @@
 <br>
 &nbsp;&nbsp;1-1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/JAVA-Annotation">JAVA Annotation</a> ver.200901
 <br>
-2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL">MySQL</a> ver.200824
+2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL">MySQL</a> ver.201203
 <br>
 3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query">MySQL Query</a> ver.200915
 <br> 
