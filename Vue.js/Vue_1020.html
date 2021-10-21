@@ -1,0 +1,94 @@
+<html>
+<head>
+	<title> Vue.js </title>
+	<link rel="stylesheet" type="text/css" href="vue.css" >
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  <!-- 개발자 버전 -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> --> <!-- 상용 버전 -->
+	<script src="jquery-1.11.0.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			setEvent();
+		});
+		
+		function setEvent() {
+			var app1 = new Vue({
+				el: '#app-1',
+				data: {
+					message: 'app1.message = \'\' 를 이용해 텍스트 변경해보기'
+				}
+			})
+			
+			var app2 = new Vue({
+				el: "#app-2",
+				data: {
+					errors: [],
+					name: null,
+					email: null,
+					movie: null
+				},
+				methods: {
+					checkForm(e) {
+						e.preventDefault();
+						this.errors = [];
+						console.log(typeof this); // Object
+						if (!this.name) {
+							this.errors.push("이름은 필수입니다.");
+						}
+						if (!this.email) {
+							this.errors.push("이메일은 필수입니다.");
+						} else if (!this.validEmail(this.email)) {
+							this.errors.push("이메일 형식을 확인하세요.");
+						}
+						if (!this.errors.length) return true;
+					},
+					validEmail: function(email) {
+						var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+						return re.test(email);
+					}
+				}
+			});
+			
+		}
+	</script>
+</head>
+
+<body>
+
+	<span class="span">📌 선언적 렌더링 1</span>
+	<div id="app-1" class="select-area">
+		{{ message }}
+		<h6>
+			* 간단한 템플릿 구문을 사용하여 DOM에서 데이터를 선언적으로 렌더링 할 수있는 시스템이 있음<br>
+			* Vue 앱은 단일 DOM 요소(우리의 경우 #app)에 연결되어 DOM 요소를 완전히 제어함<br>
+			* HTML는 엔트리 포인트일뿐 다른 모든 것은 새롭게 생성된 Vue 인스턴스 내에서 발생
+		</h6>
+	</div>
+	
+	<br>
+	
+	<span class="span">📌 유효성 검사</span>
+	<div class="select-area">
+		<form id="app-2" @submit="checkForm" action="/something" method="post" novalidate="true">
+			<p v-if="errors.length">
+				<b>아래 오류를 수정하세요.:</b>
+				<ul>
+				  <li v-for="error in errors">{{ error }}</li>
+				</ul>
+			</p>
+			<p> <input type="text" class="txt" style="margin-top:10px; width:90%;" v-model="name" name="name" id="name" placeholder="이름"> </p>
+			<p> <input type="text" class="txt" style="margin-top:10px; width:90%;" v-model="email" name="email" id="email" placeholder="이메일"> </p>
+			<p>
+				<select name="movie" id="movie" v-model="movie">
+					<option>토이스토리</option>
+					<option>알라딘</option>
+					<option>겨울왕국</option>
+				</select>
+			</p>
+			<p><input type="submit" value="Submit"></p>
+		</form>
+	</div>
+	
+	<br>
+
+</body>
+</html>
