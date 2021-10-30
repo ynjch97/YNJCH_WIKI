@@ -3,7 +3,7 @@
 <br>
 2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/CSS">CSS</a> ver.200818
 <br>
-3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Javascript">Javascript</a> ver.200819
+3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Javascript">Javascript</a> ver.211030
 <br>
 4. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/JQuery">JQuery</a> ver.200901
 <br>
