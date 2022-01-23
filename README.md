@@ -19,7 +19,7 @@
 <br>
 3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query">MySQL Query</a> ver.200915
 <br> 
-3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Python">Python</a> ver.211115
+3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Python">Python</a> ver.220123
 <br> 
 
 <h4>리눅스</h4>
