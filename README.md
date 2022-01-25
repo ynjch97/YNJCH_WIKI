@@ -37,3 +37,5 @@
 <br>
 4. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Elastic-Search">Elastic Search</a> ver.211030
 <br>
+5. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/JAVA-Data-Structure">JAVA Data Structure</a> ver.220125
+<br>
