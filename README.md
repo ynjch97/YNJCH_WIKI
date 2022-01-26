@@ -17,9 +17,11 @@
 <br>
 2. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL">MySQL</a> ver.201203
 <br>
-3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query">MySQL Query</a> ver.200915
+&nbsp;&nbsp;2-1. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query">MySQL Query</a> ver.200915
 <br> 
-3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Python">Python</a> ver.220123
+3. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/JPA">JPA</a> ver.220123
+<br> 
+4. <a href="https://github.com/ynjch97/YNJCH_WIKI/wiki/Python">Python</a> ver.220123
 <br> 
 
 <h4>리눅스</h4>
