@@ -28,4 +28,4 @@
 - [Git](https://github.com/ynjch97/YNJCH_WIKI/wiki/Git) ver.211030
 - [Elastic Search](https://github.com/ynjch97/YNJCH_WIKI/wiki/Elastic-Search) ver.211030
 - [Swagger](https://github.com/ynjch97/YNJCH_WIKI/wiki/Swagger) ver.220203
-- [JWT Token](https://github.com/ynjch97/YNJCH_WIKI/wiki/JWT-Token) ver.220203
+- [JWT Token](https://github.com/ynjch97/YNJCH_WIKI/wiki/JWT-Token) ver.220204
