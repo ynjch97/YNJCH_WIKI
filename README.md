@@ -30,3 +30,5 @@
 - [Swagger](https://github.com/ynjch97/YNJCH_WIKI/wiki/Swagger) ver.220203
 - [JWT Token](https://github.com/ynjch97/YNJCH_WIKI/wiki/JWT-Token) ver.220204
 - [Encryption](https://github.com/ynjch97/YNJCH_WIKI/wiki/Encryption) ver.220207
+- [Kafka](https://github.com/ynjch97/YNJCH_WIKI/wiki/Kafka) ver.220207
+- [MSA](https://github.com/ynjch97/YNJCH_WIKI/wiki/MSA) ver.220207
