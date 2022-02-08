@@ -12,11 +12,10 @@
 - [JPA Hibernate](https://github.com/ynjch97/YNJCH_WIKI/wiki/JPA-Hibernate) ver.220126
 - [Python](https://github.com/ynjch97/YNJCH_WIKI/wiki/Python) ver.220123
 
-
 ## DB
 - [MySQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL) ver.201203
 - [MySQL Query](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query) ver.200915
-- [H2](https://github.com/ynjch97/YNJCH_WIKI/wiki/H2) ver.220204
+- [H2](https://github.com/ynjch97/YNJCH_WIKI/wiki/H2) ver.220208
 
 ## 오픈소스
 - [Elastic Search](https://github.com/ynjch97/YNJCH_WIKI/wiki/Elastic-Search) ver.211030
