@@ -17,7 +17,7 @@
 - [MySQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL) ver.201203
 - [MySQL Query](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query) ver.220213
 - [H2](https://github.com/ynjch97/YNJCH_WIKI/wiki/H2) ver.220208
-- [PL/SQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/PLSQL) ver.220405
+- [PL/SQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL) ver.220405
 
 ## 오픈소스
 - [Elastic Search](https://github.com/ynjch97/YNJCH_WIKI/wiki/Elastic-Search) ver.211030
