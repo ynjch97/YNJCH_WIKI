@@ -17,7 +17,7 @@
 - [MySQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL) ver.201203
 - [MySQL Query](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query) ver.220213
 - [H2](https://github.com/ynjch97/YNJCH_WIKI/wiki/H2) ver.220208
-- [Oracle](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle) ver.220810
+- [Oracle](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle) ver.220811
 - [Oracle 2](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle-2) ver.220414
 - [PL/SQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL) ver.220414
 
