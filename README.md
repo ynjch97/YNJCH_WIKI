@@ -19,7 +19,7 @@
 - [H2](https://github.com/ynjch97/YNJCH_WIKI/wiki/H2) ver.220208
 - [Oracle](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle) ver.220812
 - [Oracle 2](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle-2) ver.220816
-- [PL/SQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL) ver.220414
+- [PL/SQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL) ver.220816
 
 ## 오픈소스
 - [Elastic Search](https://github.com/ynjch97/YNJCH_WIKI/wiki/Elastic-Search) ver.211030
