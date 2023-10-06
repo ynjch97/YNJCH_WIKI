@@ -45,6 +45,7 @@
 ## 기타
 - [개발환경 세팅](https://github.com/ynjch97/YNJCH_WIKI/wiki/%EA%B0%9C%EB%B0%9C-%ED%99%98%EA%B2%BD-%EC%84%B8%ED%8C%85) ver.200807
 - [Eclipse 사용 팁](https://github.com/ynjch97/YNJCH_WIKI/wiki/Eclipse) ver.200909
+- [Intelli J 사용](https://github.com/ynjch97/YNJCH_WIKI/wiki/IntelliJ) ver.231006
 - [Git](https://github.com/ynjch97/YNJCH_WIKI/wiki/Git) ver.211030
 - [MSA](https://github.com/ynjch97/YNJCH_WIKI/wiki/MSA) ver.220207
 - [REST API](https://github.com/ynjch97/YNJCH_WIKI/wiki/REST-API) ver.220208
