@@ -22,6 +22,7 @@
 - [H2](https://github.com/ynjch97/YNJCH_WIKI/wiki/H2) ver.220208
 - [Oracle](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle) ver.231006
 - [Oracle 2](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle-2) ver.231006
+- [Oracle Query](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle-Query) ver.220213
 - [PL/SQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL) ver.220816
 - [PL/SQL 2](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL-2) ver.220818
 
