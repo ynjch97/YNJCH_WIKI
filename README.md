@@ -25,6 +25,7 @@
 - [Oracle Query](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle-Query) ver.231011
 - [PL/SQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL) ver.220816
 - [PL/SQL 2](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL-2) ver.220818
+- [Informatica](https://github.com/ynjch97/YNJCH_WIKI/wiki/Informatica) ver.231101
 
 ## 오픈소스
 - [Elastic Search](https://github.com/ynjch97/YNJCH_WIKI/wiki/Elastic-Search) ver.211030
