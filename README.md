@@ -20,7 +20,7 @@
 - [MySQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL) ver.201203
 - [MySQL Query](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query) ver.220213
 - [H2](https://github.com/ynjch97/YNJCH_WIKI/wiki/H2) ver.220208
-- [Oracle](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle) ver.231006
+- [Oracle](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle) ver.231120
 - [Oracle 2](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle-2) ver.231006
 - [Oracle Query](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle-Query) ver.231011
 - [PL/SQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL) ver.220816
@@ -52,3 +52,4 @@
 - [Git](https://github.com/ynjch97/YNJCH_WIKI/wiki/Git) ver.211030
 - [MSA](https://github.com/ynjch97/YNJCH_WIKI/wiki/MSA) ver.220207
 - [REST API](https://github.com/ynjch97/YNJCH_WIKI/wiki/REST-API) ver.220208
+- [Excel VBA](https://github.com/ynjch97/YNJCH_WIKI/wiki/Excel-VBA) ver.231120
