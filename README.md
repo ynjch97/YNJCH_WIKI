@@ -52,4 +52,6 @@
 - [Git](https://github.com/ynjch97/YNJCH_WIKI/wiki/Git) ver.211030
 - [MSA](https://github.com/ynjch97/YNJCH_WIKI/wiki/MSA) ver.220207
 - [REST API](https://github.com/ynjch97/YNJCH_WIKI/wiki/REST-API) ver.220208
-- [Excel VBA](https://github.com/ynjch97/YNJCH_WIKI/wiki/Excel-VBA) ver.231120
+- [Excel VBA](https://github.com/ynjch97/YNJCH_WIKI/wiki/Excel-VBA) ver.231220
+- [InnoQuartz](https://github.com/ynjch97/YNJCH_WIKI/wiki/InnoQuartz) ver.231220
+- [Control-M](https://github.com/ynjch97/YNJCH_WIKI/wiki/Control-M) ver.231220
