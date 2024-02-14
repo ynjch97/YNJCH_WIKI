@@ -6,6 +6,7 @@
 - [Vue.js](https://github.com/ynjch97/YNJCH_WIKI/wiki/Vue.js) ver.200821
 - [Node.js](https://github.com/ynjch97/YNJCH_WIKI/wiki/Node.js) ver.231007
 - [Django](https://github.com/ynjch97/YNJCH_WIKI/wiki/Django) ver.220209
+- [Quasar](https://github.com/ynjch97/YNJCH_WIKI/wiki/Quasar) ver.240214
 
 ## Java
 - [JAVA](https://github.com/ynjch97/YNJCH_WIKI/wiki/JAVA") ver.220123
