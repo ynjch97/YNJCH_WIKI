@@ -39,7 +39,8 @@
 
 ## Linux
 - [Linux](https://github.com/ynjch97/YNJCH_WIKI/wiki/Linux) ver.200819
-- [Linux 명령어](https://github.com/ynjch97/YNJCH_WIKI/wiki/Linux--%EB%AA%85%EB%A0%B9%EC%96%B4) ver.200917
+- [Linux 명령어](https://github.com/ynjch97/YNJCH_WIKI/wiki/Linux--%EB%AA%85%EB%A0%B9%EC%96%B4) ver.240325
+- [Linux Server](https://github.com/ynjch97/YNJCH_WIKI/wiki/Linux-Server) ver.240325
 
 ## 자료구조
 - [Heap](https://github.com/ynjch97/YNJCH_WIKI/wiki/Heap) ver.220125
