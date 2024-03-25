@@ -19,7 +19,7 @@
 ## DB
 - [SQLD](https://github.com/ynjch97/YNJCH_WIKI/wiki/SQLD) ver.220829
 - [SQLD QnA](https://github.com/ynjch97/YNJCH_WIKI/wiki/SQLD-QnA) ver.220831
-- [MySQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL) ver.201203
+- [MySQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL) ver.230325
 - [MySQL Query](https://github.com/ynjch97/YNJCH_WIKI/wiki/MySQL-Query) ver.220213
 - [H2](https://github.com/ynjch97/YNJCH_WIKI/wiki/H2) ver.220208
 - [Oracle](https://github.com/ynjch97/YNJCH_WIKI/wiki/Oracle) ver.231120
