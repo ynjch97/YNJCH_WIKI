@@ -4,7 +4,7 @@
 - [Javascript](https://github.com/ynjch97/YNJCH_WIKI/wiki/Javascript) ver.211030
 - [JQuery](https://github.com/ynjch97/YNJCH_WIKI/wiki/JQuery) ver.200901
 - [Vue.js](https://github.com/ynjch97/YNJCH_WIKI/wiki/Vue.js) ver.200821
-- [Vue3](https://github.com/ynjch97/YNJCH_WIKI/wiki/Vue3) ver.240325
+- [Vue3](https://github.com/ynjch97/YNJCH_WIKI/wiki/Vue3) ver.240416
 - [Node.js](https://github.com/ynjch97/YNJCH_WIKI/wiki/Node.js) ver.231007
 - [Django](https://github.com/ynjch97/YNJCH_WIKI/wiki/Django) ver.220209
 - [Quasar](https://github.com/ynjch97/YNJCH_WIKI/wiki/Quasar) ver.240214
@@ -28,6 +28,7 @@
 - [PL/SQL](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL) ver.220816
 - [PL/SQL 2](https://github.com/ynjch97/YNJCH_WIKI/wiki/PL-SQL-2) ver.220818
 - [Informatica](https://github.com/ynjch97/YNJCH_WIKI/wiki/Informatica) ver.231101
+- [iBatis](https://github.com/ynjch97/YNJCH_WIKI/wiki/iBatis) ver.240416
 
 ## 오픈소스
 - [Elastic Search](https://github.com/ynjch97/YNJCH_WIKI/wiki/Elastic-Search) ver.211030
