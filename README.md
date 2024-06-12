@@ -16,7 +16,8 @@
 - [JPA Hibernate](https://github.com/ynjch97/YNJCH_WIKI/wiki/JPA-Hibernate) ver.220126
 - [Python](https://github.com/ynjch97/YNJCH_WIKI/wiki/Python) ver.220123
 - [Dart](https://github.com/ynjch97/YNJCH_WIKI/wiki/Dart) ver.240430
-- [Flutter](https://github.com/ynjch97/YNJCH_WIKI/wiki/Flutter) ver.240507
+- [Flutter](https://github.com/ynjch97/YNJCH_WIKI/wiki/Flutter) ver.240520
+- [Flutter Error](https://github.com/ynjch97/YNJCH_WIKI/wiki/Flutter-Error) ver.240520
 
 ## DB
 - [SQLD](https://github.com/ynjch97/YNJCH_WIKI/wiki/SQLD) ver.220829
