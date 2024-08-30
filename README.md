@@ -17,7 +17,7 @@
 - [Python](https://github.com/ynjch97/YNJCH_WIKI/wiki/Python) ver.220123
 - [Dart](https://github.com/ynjch97/YNJCH_WIKI/wiki/Dart) ver.240430
 - [Flutter](https://github.com/ynjch97/YNJCH_WIKI/wiki/Flutter) ver.240709
-- [Flutter Error](https://github.com/ynjch97/YNJCH_WIKI/wiki/Flutter-Error) ver.240724
+- [Flutter Error](https://github.com/ynjch97/YNJCH_WIKI/wiki/Flutter-Error) ver.240830
 - [Flutter Tip](https://github.com/ynjch97/YNJCH_WIKI/wiki/Flutter-Tip) ver.240724
 
 ## DB
@@ -57,7 +57,7 @@
 - [개발환경 세팅](https://github.com/ynjch97/YNJCH_WIKI/wiki/%EA%B0%9C%EB%B0%9C-%ED%99%98%EA%B2%BD-%EC%84%B8%ED%8C%85) ver.200807
 - [Eclipse 사용 팁](https://github.com/ynjch97/YNJCH_WIKI/wiki/Eclipse) ver.200909
 - [Intelli J 사용](https://github.com/ynjch97/YNJCH_WIKI/wiki/Intelli-J) ver.231006
-- [Github](https://github.com/ynjch97/YNJCH_WIKI/wiki/Github) ver.240325
+- [Github](https://github.com/ynjch97/YNJCH_WIKI/wiki/Github) ver.240830
 - [MSA](https://github.com/ynjch97/YNJCH_WIKI/wiki/MSA) ver.220207
 - [REST API](https://github.com/ynjch97/YNJCH_WIKI/wiki/REST-API) ver.220208
 - [Excel VBA](https://github.com/ynjch97/YNJCH_WIKI/wiki/Excel-VBA) ver.231220
